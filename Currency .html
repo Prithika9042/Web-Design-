@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+</head>
+<style>
+    body{
+        background-color:aqua;
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy_wxJEFGob_FNG_3QO2VVjgBiY0osn_cjgQ&s");
+    }
+    #box{
+        background-color: aquamarine;
+    
+    border: 2px solid blue;
+        background-color: pink;
+        display: flex;
+        justify-content: center;
+        
+        flex-direction: column;
+        height: 300px;
+        width: 200px;
+        padding: 30px;
+        margin-top: 50px;
+        margin-left: 30px;
+        color: black;
+        border-radius: 20px;
+        box-shadow: 10px 10px 10px black;
+    }
+</style>
+
+<body>
+    <center>
+ <div id="box">
+<h2>Currency Converter</h2>
+
+<label>Amount:</label>
+<input type="number" id="amount" placeholder="Enter amount"><br><br>
+
+<label>From:</label>
+<select id="fromCurrency">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="INR">INR</option>
+</select>
+
+<label>To:</label>
+<select id="toCurrency">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="INR">INR</option>
+</select><br><br>
+
+<button onclick="convertCurrency()">Convert</button>
+
+<h3 id="result"></h3> </div>
+</center>
+<script>
+const rates = {
+    USD: { USD: 1, EUR: 0.92, INR: 83 },
+    EUR: { USD: 1.09, EUR: 1, INR: 90 },
+    INR: { USD: 0.012, EUR: 0.011, INR: 1 }
+};
+
+function convertCurrency() {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const from = document.getElementById("fromCurrency").value;
+    const to = document.getElementById("toCurrency").value;
+
+    if (!amount || amount < 0) {
+        document.getElementById("result").innerText = "Please enter a valid amount.";
+        return;
+    }
+
+    const rate = rates[from][to];
+    const converted = amount * rate;
+
+    document.getElementById("result").innerText =
+        `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+}
+</script>
+
+</body>
+</html>
